@@ -1,0 +1,91 @@
+$noise-bg: image-url('noise.png') top left !default;
+$img-border: inline-image('dotted-border.png');
+
+// Main Link Colors
+$link-color: #214459 !default;
+$link-color-hover: $link-color !default;
+$link-color-visited: adjust-color($link-color, $hue: 80, $lightness: -4) !default;
+$link-color-active: adjust-color($link-color-hover, $lightness: -15) !default;
+
+// Main Section Color
+$main-bg: #fff !default;
+$page-bg: linear-gradient(#fcd3a8, #240e2b)  !default;
+$article-border: #eeeeee !default;
+
+$header-bg-front: #57b1e0 !default;
+$header-bg-back: radial-gradient(top center, rgba(#fff, 0.3) 10%, rgba(#fff, 0) 60%) !default;
+$header-border: lighten($header-bg-front, 15) !default;
+$title-color: #f7fcff !default;
+$subtitle-color: #d8e6ef !default;
+
+$text-color: #214459 !default;
+$text-color-light: #9eb4c1 !default;
+$type-border: #ddd !default;
+
+$shadow-color: #3b3834 !default;
+
+/* Navigation */
+$nav-bg: #fff !default;
+$nav-bg-front: $nav-bg !default;
+$nav-bg-back: $nav-bg ;
+$nav-color: darken($nav-bg, 38) !default;
+$nav-color-hover: darken($nav-color, 25) !default;
+$nav-placeholder: desaturate(darken($nav-bg, 10), 15) !default;
+$nav-border: darken($nav-bg, 10) !default;
+$nav-border-top: none !default;
+$nav-border-bottom: darken($nav-bg, 10) !default;
+$nav-border-left: none !default;
+$nav-border-right: none !default;
+
+/* Sidebar colors */
+$sidebar-bg: #fff !default;
+$sidebar-link-color: $link-color !default;
+$sidebar-link-color-hover: $link-color-hover !default;
+$sidebar-link-color-active: $link-color-active !default;
+$sidebar-color: change-color(mix($text-color, $sidebar-bg, 80), $hue: hue($sidebar-bg), $saturation: saturation($sidebar-bg)/2) !default;
+$sidebar-border: desaturate(darken($sidebar-bg, 7), 10) !default;
+$sidebar-border-hover: darken($sidebar-bg, 7) !default;
+$sidebar-link-color-subdued: lighten($sidebar-color, 20) !default;
+$sidebar-link-color-subdued-hover: $sidebar-link-color-hover !default;
+
+$footer-color: #888 !default;
+$footer-bg: #e1e2e3 !default;
+$footer-bg-front: none !default;
+$footer-bg-back: linear-gradient(lighten($footer-bg, 5), $footer-bg 40%) !default;
+$footer-color: darken($footer-bg, 38) !default;
+$footer-color-hover: darken($footer-color, 10) !default;
+$footer-border-top: lighten($footer-bg, 10) !default;
+$footer-border-bottom: darken($footer-bg, 15) !default;
+$footer-link-color: darken($footer-bg, 38) !default;
+$footer-link-color-hover: darken($footer-color, 25) !default;
+$page-border-bottom: darken($footer-bg, 5) !default;
+
+
+/* Core theme application */
+
+a {
+  @include link-colors($link-color, $hover: $link-color-hover, $focus: $link-color-hover, $visited: $link-color-visited, $active: $link-color-active);
+}
+aside.sidebar a {
+  @include link-colors($sidebar-link-color, $hover: $sidebar-link-color-hover, $focus: $sidebar-link-color-hover, $active: $sidebar-link-color-active);
+}
+a {
+  @include transition(color .3s);
+}
+
+html {
+  @include background($page-bg);
+  height: 100%;
+}
+body {
+  @include box-shadow(0 2px 10px rgba($shadow-color, 0.6), 0 0 1px rgba($shadow-color, 0.1), 0 0 0 10px rgba(#fff, 0.2));
+
+  > div {
+    background: $sidebar-bg;
+    border-bottom: 1px solid $page-border-bottom;
+    > div {
+      background: $main-bg;
+      border-right: 1px solid $sidebar-border;
+    }
+  }
+}

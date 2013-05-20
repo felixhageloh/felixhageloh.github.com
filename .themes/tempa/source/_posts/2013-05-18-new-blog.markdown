@@ -1,0 +1,14 @@
+---
+layout: post
+title: "New Blog"
+date: 2013-05-18 11:30
+comments: true
+categories: [News, Meta]
+---
+
+Here is to a fresh start!
+---
+
+Since posterous shut down I had to migrate my not-so-active blog, but wasn't successful with importing all my old posts so far. Many of them are probably not worth the trouble. I do hope to move over the more interesting posts some time soon, though!
+
+*Stay tuned!*
