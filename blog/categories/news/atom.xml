@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: News | Traces Of]]></title>
-  <link href="http://tracesof.net/blog/categories/news/atom.xml" rel="self"/>
-  <link href="http://tracesof.net/"/>
-  <updated>2013-05-18T12:05:52+02:00</updated>
-  <id>http://tracesof.net/</id>
+  <link href="http://felixhageloh.github.io/blog/categories/news/atom.xml" rel="self"/>
+  <link href="http://felixhageloh.github.io/"/>
+  <updated>2013-05-20T14:44:39+02:00</updated>
+  <id>http://felixhageloh.github.io/</id>
   <author>
     <name><![CDATA[Felix Hageloh]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[New Blog]]></title>
-    <link href="http://tracesof.net/blog/2013/05/18/new-blog/"/>
+    <link href="http://felixhageloh.github.io/blog/2013/05/18/new-blog/"/>
     <updated>2013-05-18T11:30:00+02:00</updated>
-    <id>http://tracesof.net/blog/2013/05/18/new-blog</id>
+    <id>http://felixhageloh.github.io/blog/2013/05/18/new-blog</id>
     <content type="html"><![CDATA[<h2>Here is to a fresh start!</h2>
 
 <p>Since posterous shut down I had to migrate my not-so-active blog, but wasn&rsquo;t successful with importing all my old posts so far. Many of them are probably not worth the trouble. I do hope to move over the more interesting posts some time soon, though!</p>

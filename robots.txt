@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://tracesof.net/sitemap.xml 
+Sitemap: http://felixhageloh.github.io/sitemap.xml 
