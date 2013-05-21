@@ -6,8 +6,6 @@ body > nav {
     top: 1px solid $nav-border-top;
     bottom: 1px solid $nav-border-bottom; 
   }
-  padding-top: .35em;
-  padding-bottom: .35em;
   font-size: .8em;
   
   form {
@@ -41,10 +39,13 @@ body > nav {
 
 
   ul {
-    @include horizontal-list(0);
     float: left;
     display: block;
+    margin: 0;
+    padding: 0;
     padding-top: .15em;
+    margin-left: -0.5em;
+    margin-bottom: -1px;
   }
   ul.subscription {
     margin-left: .8em;
@@ -52,7 +53,18 @@ body > nav {
     li:last-child a { padding-right: 0; }
   }
   ul li {
-    margin: 0;
+    margin: 0 0.5em;
+    padding: 0.2em 0;
+    display: block;
+    float: left;
+    list-style-image: none;
+    list-style-type: none;
+  }
+  ul .current {
+    border-bottom: 1px solid #999;
+    a {
+      font-weight: bold;
+    }
   }
   a {
     @include link-colors($nav-color, $nav-color-hover, $visited: $nav-color);
@@ -67,7 +79,6 @@ body > nav {
     border-left: 1px solid $nav-border-left;
     margin-left: .8em;
     a {
-      padding-left: .8em;
       border-left: 1px solid $nav-border-right;
     }
   }
@@ -90,7 +101,9 @@ body > nav {
 
   @media only screen and (min-width: 550px) {
     font-size: .9em;
-    padding-bottom: 1em;
+    ul li {
+      padding-bottom: 0.5em;
+    }
   }
 
   @media only screen and (min-width: 992px) {
