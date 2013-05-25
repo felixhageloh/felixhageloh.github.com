@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,100);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100);
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
 $blockquote: $type-border !default;
@@ -37,6 +37,10 @@ body {
 h1 {
   font-size: 1.6em;
   line-height: 1.2em;
+}
+
+article {
+    font-weight: 300;
 }
 
 // @media only screen and (min-width: 992px) {

@@ -6,7 +6,6 @@ comments: true
 categories: javascript, web, mobile
 ---
 
-
 Sometimes building web apps feels like trying to build a house of cards while the browser might pull away the carpet from underneath you at any moment. Text entry on mobile is one of these issues were you, as a developer, have very little control over what you want to achieve versus what the browser thinks it is best for you. 
 
 Mobile browsers have a reason for this of course. When the mobile web came about, websites and web apps where not designed with a small screen and a software keyboard in mind. In order to still provide a decent experience when entering text, mobile browsers had to come up with some solutions. For Mobile Safari that solution was to overlay the soft keyboard over the page and scroll the page so that the focused text field is in centre of the visible space above the keyboard.
