@@ -3,7 +3,7 @@ layout: post
 title: "New Blog"
 date: 2013-05-18 11:30
 comments: true
-categories: [News, Meta]
+categories: [news, meta]
 ---
 
 Here is to a fresh start!

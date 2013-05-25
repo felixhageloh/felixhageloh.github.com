@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Text Entry Woes for Mobile Webapps"
+date: 2013-05-21 21:26
+comments: true
+categories: javascript, web, mobile
+---
+
+
+Sometimes building web apps feels like trying to build a house of cards while the browser might pull away the carpet from underneath you at any moment. Text entry on mobile is one of these issues were you, as a developer, have very little control over what you want to achieve versus what the browser thinks it is best for you. 
+
+Mobile browsers have a reason for this of course. When the mobile web came about, websites and web apps where not designed with a small screen and a software keyboard in mind. In order to still provide a decent experience when entering text, mobile browsers had to come up with some solutions. For Mobile Safari that solution was to overlay the soft keyboard over the page and scroll the page so that the focused text field is in centre of the visible space above the keyboard.
+
+While this works great on normal websites, on your carefully crafted web app you might want something like this
+
+<img>
+
+but instead what you get is this
+
+<img>
+
+This might not seem like a big deal at first glance, but when trying to create a seamless near-native user experience, this can ruin your day. Submit buttons and other form that were carefully placed to be visible and easily reachable when entering text are now scrolled half way off the screen. In combination with the unexpected movement it really makes the app feel broken.
+

@@ -1,9 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,100);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
 $blockquote: $type-border !default;
 $sans: "PT Sans", "Helvetica Neue", Arial, sans-serif !default;
 $serif: 'Roboto Slab', serif;
-$mono: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace !default;
+$mono: "Ubuntu Mono", monospace, sans-serif !default;
 $heading-font-family: 'Roboto Slab', serif !default;
 $header-title-font-family: $heading-font-family !default;
 $header-subtitle-font-family: $heading-font-family !default;
@@ -34,7 +35,7 @@ body {
   @extend .serif;
 }
 h1 {
-  font-size: 2.2em;
+  font-size: 1.6em;
   line-height: 1.2em;
 }
 
