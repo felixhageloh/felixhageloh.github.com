@@ -6,6 +6,7 @@ body > header {
   text-shadow: 0 0 1px $header-bg, 0 0 1px $header-bg, 0 0 5px $header-bg, 0 0 5px $header-bg, 0 0 5px $header-bg, 0 0 5px $header-bg, 0 0 5px $header-bg;
   background: $header-bg image-url('circles.png') no-repeat;
   background-size: 132px 140px;
+  opacity: 0.98;
 
   h1 {
     display: inline-block;
