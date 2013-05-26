@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: web, | Traces Of]]></title>
+  <link href="http://felixhageloh.github.io/blog/categories/web/atom.xml" rel="self"/>
+  <link href="http://felixhageloh.github.io/"/>
+  <updated>2013-05-26T13:20:36+02:00</updated>
+  <id>http://felixhageloh.github.io/</id>
+  <author>
+    <name><![CDATA[Felix Hageloh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Text Entry Woes for Mobile Web Apps]]></title>
+    <link href="http://felixhageloh.github.io/blog/2013/05/21/text-entry-mobile/"/>
+    <updated>2013-05-21T21:26:00+02:00</updated>
+    <id>http://felixhageloh.github.io/blog/2013/05/21/text-entry-mobile</id>
+    <content type="html"><![CDATA[<p>Sometimes building web apps feels like trying to build a house of cards while the browser might pull away the carpet from underneath you at any moment. Text entry on mobile is one of these issues were you, as a developer, have very little control over what you want to achieve versus what the browser thinks it is best for you. </p>
+
+<p>Mobile browsers have a reason for this of course. When the mobile web came about, websites and web apps where not designed with a small screen and a software keyboard in mind. In order to still provide a decent experience when entering text, mobile browsers had to come up with some solutions. For Mobile Safari that solution was to overlay the soft keyboard on top of the page and scroll the page so that the focused text field is in center of the visible space above the keyboard.</p>
+
+<h3 id="dont-push-me-cause-">don’t push me, ‘cause …</h3>
+
+<p>While this works great on normal websites, in your carefully crafted web app you might run into something like this:</p>
+
+<p><img class="left" src="/images/mobile_safari_form_good_cut.png" width="320" height="380" title=":)" >
+<img src="/images/mobile_safari_form_borked_cut.png" width="320" height="380" title=":(" ></p>
+
+<p>This might not seem like a big deal at the first glance, but when trying to create a seamless, near-native user experience, this can ruin your day. Submit buttons and other form elements that were carefully placed to be visible and easily reachable when entering text are now scrolled halfway off the screen. In combination with the unexpected movement it really makes the app feel broken.</p>
+
+<h3 id="ttwindowscrollto-to-the-rescuett"><tt>window.scrollTo to the rescue</tt></h3>
+
+<p>So what can we do about this. There is, to my knowledge, no clean work around. A lot of default behaviour of the browser can be tweaked using css, some kind of <tt>event.preventDefault()</tt> or by other means, but this isn’t one of them. What we <em>can</em> do, however, is to reset the scroll offset using javascript (or coffeescript in this case), so something like this:</p>
+
+<p><code>javascript
+$(textareaEl).on('focus', function () { window.scrollTo(0, 0) });
+</code>
+This is assuming that your web app takes the whole screen space and hides the address bar. However, it doesn’t quite work; the browser scrolls just slightly after the focus event fires, so the page scrolls anyway. Using a <tt>setTimeout</tt> works, but you rely on a magic number, plus it is hard to catch it exactly when it scrolls, so that there is a visible jump happening before the text field moves back in its correct position. </p>
+
+<h3 id="hard-to-catch">hard to catch</h3>
+
+<p>It turns out, that if you focus the text field programatically, there is no delay before the page scrolls, so the <tt>onfocus</tt> handler catches it just in time. </p>
+
+<p>So the final solution boils down to: </p>
+
+<ul>
+  <li>stop the browser from focusing the textfield when the user taps it.</li>
+  <li>focus the text field programatically.</li>
+  <li>scroll window back to top when the focus event fires.</li>
+</ul>
+
+<p>I need to emphasise that this is <em>only</em> a valid solution if your are dealing with a full-on web app, which is sized to fit the screen and is not user scalable. <strong>Double tap zoom, or pinch zoom will break</strong> with this approach (just on the text field, not the entire site)!</p>
+
+<h3 id="bolting-the-carpet-to-the-floor">bolting the carpet to the floor</h3>
+
+<p>In order to stop the browser from focusing the text field we need to <tt>preventDefault</tt> on touchstart (touchend should work as well). This means we have to provide our own custom tap handler, since the default click behaviour won’t get triggered. The final solution could look something like this:</p>
+
+<p>``` javascript
+// onClick is our custom click/tap handler
+onClick(myTextarea, function () { $(myTextarea).focus() });</p>
+
+<p>// scroll back to top
+$(myTextarea).on(‘focus’, function () { window.scrollTo(0, 0) })</p>
+
+<p>```</p>
+
+<p>The custom click handler could look something like this:</p>
+
+<p>``` javascript onClick</p>
+
+<p>var onClick = function(domEl, clickHandler) {
+    domEl = $(domEl); // make sure we have a query object</p>
+
+<pre><code>var startTime, startPos, canceled;
+
+domEl.on('touchstart', function (event) {
+     // this prevents the browser from firing a click event and
+     // focusing the text field
+    event.preventDefault();
+    
+    canceled  = false;
+    startTime = event.timeStamp;
+    startPos  = { x: event.pageX, y: event.pageY };
+});
+
+domEl.on('touchmove', function (event) { 
+    var dx = event.pageX - startPos.x, 
+        dy = event.pageY - startPos.y;
+    
+    // cancel click if finger moved more than 40px
+    var distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    canceled     = canceled || distance &gt; 40;
+});
+
+domEl.on('touchend', function (event) { 
+    if(canceled) return;
+    
+    // don't trigger click if finger rested longer than 500ms
+    if(event.timeStamp - startTime &lt; 500) 
+        clickHandler();
+}) };
+</code></pre>
+
+<p>```</p>
+
+<p>And there you have it; the text field stays in place, solid as a rock. We’ve bolted the carpet to the floor and can now happily continue to build our house of cards. </p>
+
+<p>Mind you, this solution is for iOS only, so on Android or other mobile platforms/browsers it won’t work and even break things. There are other solutions for these platforms, which I won’t go into further detail here. </p>
+
+<p>Finally, do remember that you are breaking default browser behaviour, which exists for a reason. So know what you are doing or else you might significantly reduce the usability of your app! Having a textfield stay hidden behind the soft keyboard, or preventing other necessary user interaction is hardly ever very user friendly ;).</p>
+]]></content>
+  </entry>
+  
+</feed>
