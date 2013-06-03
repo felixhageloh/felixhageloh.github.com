@@ -26,6 +26,13 @@ article {
         text-transform: uppercase;
         position: absolute; top: 0;
         font-weight: 100;
+        width: 100%;
+      }
+
+      a {
+        float: right;
+        text-decoration: none;
+        text-transform: none;
       }
     }
     @media only screen and (min-width: 768px) {
