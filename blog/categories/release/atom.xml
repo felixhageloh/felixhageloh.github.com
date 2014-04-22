@@ -4,7 +4,7 @@
   <title><![CDATA[Category: release | Traces Of]]></title>
   <link href="http://felixhageloh.github.io/blog/categories/release/atom.xml" rel="self"/>
   <link href="http://felixhageloh.github.io/"/>
-  <updated>2014-04-22T14:33:26+02:00</updated>
+  <updated>2014-04-22T14:39:02+02:00</updated>
   <id>http://felixhageloh.github.io/</id>
   <author>
     <name><![CDATA[Felix Hageloh]]></name>
@@ -18,7 +18,7 @@
     <link href="http://felixhageloh.github.io/blog/2014/04/22/ubersicht/"/>
     <updated>2014-04-22T13:26:00+02:00</updated>
     <id>http://felixhageloh.github.io/blog/2014/04/22/ubersicht</id>
-    <content type="html"><![CDATA[<p><img class="center" src="/images/ubersicht-icon@2x.png" width="256" height="256" title="icon" ></p>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/uebersicht-icon@2x.png" width="256" height="256" title="icon" ></p>
 
 <p>Earlier today I released <a href="http://tracesof.net/uebersicht/">Übersicht</a>, a little Mac app I originally wrote to scratch my own itch. It is essentially like <a href="http://projects.tynsoe.org/en/geektool/">GeekTool</a>, which lets you run system commands and display their output on your desktop. The main difference that widgets are written in HTML5, which was originally motivated by these two main reasons:</p>
 
