@@ -83,3 +83,11 @@ body {
     }
   }
 }
+
+
+article ul li {
+  list-style-type: none;
+  margin-top: 4px;
+  padding-left: 8px;
+  border-left: 8px solid #999;
+}
