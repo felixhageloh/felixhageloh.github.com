@@ -1,11 +1,11 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400);
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
 $blockquote: $type-border !default;
-$sans: "PT Sans", "Helvetica Neue", Arial, sans-serif !default;
-$serif: 'Roboto Slab', serif;
+$sans: "Ubuntu", "Helvetica Neue", Arial, sans-serif !default;
+$serif: 'Ubuntu', serif;
 $mono: "Ubuntu Mono", monospace, sans-serif !default;
-$heading-font-family: 'Roboto Slab', serif !default;
+$heading-font-family: 'Ubuntu', serif !default;
 $header-title-font-family: $heading-font-family !default;
 $header-subtitle-font-family: $heading-font-family !default;
 
@@ -50,24 +50,28 @@ article {
 
 #{headings()}{
   @extend .heading;
-  text-rendering: optimizelegibility;
   margin-bottom: 1em;
-  font-weight: normal;
+  font-weight: 300;
 }
 h2, section h1 {
   font-size: 1.5em;
+  font-style: italic;
 }
 h3, section h2, section section h1 {
   font-size: 1.3em;
+  font-style: italic;
 }
 h4, section h3, section section h2, section section section h1 {
   font-size: 1em;
+  font-style: italic;
 }
 h5, section h4, section section h3 {
   font-size: .9em;
+  font-style: italic;
 }
 h6, section h5, section section h4, section section section h3 {
   font-size: .8em;
+  font-style: italic;
 }
 
 p, article blockquote, ul, ol { margin-bottom: 1.5em; }

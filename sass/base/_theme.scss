@@ -1,29 +1,29 @@
 $img-border: inline-image('dotted-border.png');
 
 // Main Link Colors
-$link-color: #ff5049 !default;// #3b526b !default;
+$link-color: #86585a !default;// #3b526b !default;
 $link-color-hover: adjust-color($link-color, $lightness: 10, $saturation: 25) !default;
 $link-color-visited: $link-color; //adjust-color($link-color, $lightness: -4, $saturation: 0) !default;
 $link-color-active: adjust-color($link-color-hover, $lightness: -15) !default;
 
 // Main Section Colors
-$main-bg: #e0e0e0 !default;
-$page-bg: #e0e0e0 !default;
+$main-bg: #fff !default;
+$page-bg: #fff !default;
 $article-border: #eeeeee !default;
 $article-header-color: #525252;
 
-$header-bg: #e4e4e4 !default;
+$header-bg: #fff !default;
 $header-border: none !default;
 $title-color: #594f47  !default;
 $subtitle-color: #4d433d !default;
 
-$text-color: #4d433d !default;
-$text-color-light: #ff5049 !default; //#f7594d !default;//#507195 !default;
+$text-color: #1d1917 !default;
+$text-color-light: #86585a !default; //#f7594d !default;//#507195 !default;
 $type-border: #ddd !default;
 
 /* Navigation */
-$nav-bg: #e5e5e5 !default;
-$nav-bg-front: #e0e0e0 !default;
+$nav-bg: #fff !default;
+$nav-bg-front: #fff !default;
 $nav-bg-back: none !default;
 $nav-color: darken($nav-bg, 38) !default;
 $nav-color-hover: darken($nav-color, 25) !default;
@@ -35,7 +35,7 @@ $nav-border-left: none !default;
 $nav-border-right: none !default;
 
 /* Sidebar colors */
-$sidebar-bg: #e0e0e0 !default;
+$sidebar-bg: #fff !default;
 $sidebar-link-color: $link-color !default;
 $sidebar-link-color-hover: $link-color-hover !default;
 $sidebar-link-color-active: $link-color-active !default;
@@ -89,5 +89,5 @@ article ul li {
   list-style-type: none;
   margin-top: 4px;
   padding-left: 8px;
-  border-left: 8px solid #999;
+  border-left: 8px solid #ddd;
 }

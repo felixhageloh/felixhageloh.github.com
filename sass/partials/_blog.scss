@@ -1,5 +1,6 @@
 article {
   padding-top: 1em;
+  clear: both;
 
   h1, h2, h3 {
     color: $article-header-color;
@@ -103,9 +104,9 @@ article + article {
 }
 .content .blog-index {
   padding: { top: 0; bottom: 0; }
-  article { 
-    padding-top: 2em; 
-    position: relative; 
+  article {
+    padding-top: 2em;
+    position: relative;
 
     // &:nth-child(even) {
     //   background: #e5e5e5;

@@ -6,7 +6,7 @@ comments: true
 categories: [release, Mac OS, NodeJS, HTML, CSS]
 ---
 
-{% img center /images/uebersicht@2x.png 256 256 icon%}
+{% img left /images/uebersicht@2x.png 256 256 icon%}
 
 Earlier today I released [Übersicht](http://tracesof.net/uebersicht/), a little Mac app I originally wrote to scratch my own itch. It is essentially like [GeekTool](http://projects.tynsoe.org/en/geektool/), which lets you run system commands and display their output on your desktop. The main difference that widgets are written in HTML5, which was originally motivated by these two main reasons:
 
