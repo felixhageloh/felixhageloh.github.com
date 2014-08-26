@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Background Filters for Übersicht - Traces Of</title>
+  <meta name="author" content="Felix Hageloh">
+
+  
+  <meta name="description" content="Today I want to reveal a ‘hidden’ feature of Übersicht that has been available since version 0.2. The reason for this secrecy is that it is in an &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://felixhageloh.github.io/blog/2014/08/25/background-filters-for-ubersicht">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Traces Of" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/javascripts/current-nav.js" type="text/javascript"></script>
+  <script src="/javascripts/scroll-header.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+  <!--[if lt IE 9]>
+     <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+     </script>
+  <![endif]-->
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Traces Of</a></h1>
+  
+    <h2>Code, Design and Random Thoughts</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><div class="content"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:felixhageloh.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</div></nav>
+  <div id="main">
+    <div class="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Background Filters for Übersicht</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-25T18:09:00+02:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
+        
+          <a href="#disqus_thread"
+             data-disqus-identifier="http://felixhageloh.github.io">
+            Comments
+          </a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Today I want to reveal a ‘hidden’ feature of Übersicht that has been available since version 0.2. The reason for this secrecy is that it is in an early beta state and still somewhat cumbersome to use. However, the release of Mac OS X Yosemite is nigh and this will probably be a welcome addition to match the visual appearance of it. So I thought, better to get some people using it and get some feedback.</p>
+
+<p>The hidden feature I am talking about is background filters. OS X Yosemite is full of them - most commonly blur filters. What they allow you to do is having beautiful translucent effects without sacrificing usability. Without filters, other content shining through translucent elements offers too many distractions. However, with the right filters you don’t so much see other content, but rather get the impression that the UI reacts to surrounding colors ever so slightly.</p>
+
+<h3 id="get-your-blur-on">get your blur on</h3>
+
+<p>So how would one recreate Yosemite’s filters in Übersicht? Of course <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter">CSS3 filters</a> have been available for use since the first release. The problem with CSS3 filters is that they can only be applied to a DOM element and not what’s <em>behind</em> a DOM element. To make matters worse, usually what’s behind Übersicht widgets is the desktop wallpaper, which is not even part of the same App, let alone the Übersicht DOM.</p>
+
+<p>To work around this issue, I’ve created a way to choose a dedicated DOM element and make it display a slice of the desktop wallpaper. The slice is chosen so that it exactly matches what would normally behind said DOM element. To understand what I mean, lets dive straight into an example.</p>
+
+<h3 id="setting-up">setting up</h3>
+
+<p><img class="left" src="/images/uebersicht-filters/no-blur.png" width="360" height="225" /></p>
+
+<p>The image to the left shows a simple widget with a translucent background and no filters applied. It has only a single DOM element that shows the widget content.
+In order to get this widget ready for background filters we first need to create a more complex DOM structure:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="coffeescript"><span class="line"><span class="nv">render: </span><span class="nf">(output) -&gt;</span> <span class="s">&quot;&quot;&quot;</span>
+</span><span class="line"><span class="s">  &lt;canvas class=&#39;bg-slice&#39;&gt;&lt;/canvas&gt;</span>
+</span><span class="line"><span class="s">  &lt;div class=&#39;content&#39;&gt;</span><span class="si">#{</span><span class="nx">output</span><span class="si">}</span><span class="s">&lt;/div&gt;</span>
+</span><span class="line"><span class="s">&quot;&quot;&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>We’ve now created a <code>canvas</code> element which will later draw the wallpaper slice, and a content element which will hold the widget content and sits in front of the canvas element. Of course we need some CSS to make this work, which comes down to:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="css"><span class="line"><span class="nc">.content</span>
+</span><span class="line">  <span class="nt">background</span><span class="o">:</span> <span class="nt">rgba</span><span class="o">(</span><span class="nf">#fff</span><span class="o">,</span> <span class="nt">0</span><span class="nc">.5</span><span class="o">)</span>
+</span><span class="line">
+</span><span class="line"><span class="nc">.bg-slice</span>
+</span><span class="line">  <span class="nt">position</span><span class="o">:</span> <span class="nt">absolute</span>
+</span><span class="line">  <span class="nt">top</span><span class="o">:</span> <span class="nt">0</span>
+</span><span class="line">  <span class="nt">left</span><span class="o">:</span> <span class="nt">0</span>
+</span><span class="line">  <span class="nt">width</span><span class="o">:</span> <span class="nt">0</span>
+</span><span class="line">  <span class="nt">height</span><span class="o">:</span> <span class="nt">0</span>
+</span><span class="line">  <span class="nt">-webkit-filter</span><span class="o">:</span> <span class="nt">blur</span><span class="o">(</span><span class="nt">10px</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>This applies the background color to the content element and makes the canvas span the entire widget, sitting behind the content. Note that using <code>width</code> and <code>height</code> is important or otherwise the canvas will have a default size 300xsomething pixels.</p>
+
+<p>This code will make the widget look identical to the previous code: The canvas element is completely transparent so there is nothing to see and nothing to apply the blur filter to.</p>
+
+<h3 id="drawing-the-background-slice">drawing the background slice</h3>
+
+<p><img class="right" src="/images/uebersicht-filters/blur.png" width="360" height="225" /></p>
+
+<p>To make the canvas draw a slice of the wallpaper we can use the the new <code>uebersicht.makeBgSlice</code> method. It expects a canvas element as an argument and will measure the elements size, ask the App for a wallpaper slice of that size and finally draw the slice. For it to be able to measure the canvas size, it needs to be called after rendering has happened. For this we can use the new <code>afterRender</code> property, which - as the name suggests - gets invoked after <code>render</code>. This gives us following code:
+<br />
+<br /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="coffeescript"><span class="line"><span class="nv">afterRender: </span><span class="nf">(domEl) -&gt;</span>
+</span><span class="line">  <span class="nx">uebersicht</span><span class="p">.</span><span class="nx">makeBgSlice</span><span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="k">for</span> <span class="nx">el</span> <span class="k">in</span> <span class="nx">$</span><span class="p">(</span><span class="nx">domEl</span><span class="p">).</span><span class="nx">find</span> <span class="s">&#39;.bg-slice&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>The result can be seen to the right. It looks pretty much what we are looking for, but keen observers will note that the background looks less blurred and more transparent towards the edges. This is a common problem with blur filters (for reasons I will not go into detail here) and corresponds to the blur radius we chose - 10px in this case.</p>
+
+<h3 id="the-final-10px">the final 10px</h3>
+
+<p>To get this just right we need to compensate for the 10px blur radius by growing the canvas element
+10px in every direction. Luckily we have Stylus to aid us here; we can make the blur radius a variable and add it to the canvas size. The code and result are shown below:</p>
+
+<p><img class="left" src="/images/uebersicht-filters/final.png" width="360" height="225" /></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="css"><span class="line"><span class="nt">bg-blur</span> <span class="o">=</span> <span class="nt">10px</span>
+</span><span class="line">
+</span><span class="line"><span class="nc">.bg-slice</span>
+</span><span class="line">  <span class="nt">position</span><span class="o">:</span> <span class="nt">absolute</span>
+</span><span class="line">  <span class="nt">top</span><span class="o">:</span> <span class="nt">-</span><span class="o">(</span><span class="nt">bg-blur</span><span class="o">)</span>
+</span><span class="line">  <span class="nt">left</span><span class="o">:</span> <span class="nt">-</span><span class="o">(</span><span class="nt">bg-blur</span><span class="o">)</span>
+</span><span class="line">  <span class="nt">width</span><span class="o">:</span> <span class="nt">100</span><span class="o">%</span> <span class="o">+</span> <span class="nt">2</span><span class="o">*</span><span class="nt">bg-blur</span>
+</span><span class="line">  <span class="nt">height</span><span class="o">:</span> <span class="nt">100</span><span class="o">%</span> <span class="o">+</span> <span class="nt">2</span><span class="o">*</span><span class="nt">bg-blur</span>
+</span><span class="line">  <span class="nt">-webkit-filter</span><span class="o">:</span> <span class="nt">blur</span><span class="o">(</span><span class="nt">bg-blur</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><br />
+<br /></p>
+
+<p>This looks very much what we are looking for already and this approach lets us easily play with different blur radii. Of course there are many other CSS3 filters available, so feel free to experiment!</p>
+
+<p>The final, complete widget is <a href="https://gist.github.com/felixhageloh/4c54a2a69b5a08b9f644">available here</a>.</p>
+
+<h3 id="caveats">caveats</h3>
+
+<p>As you have probably noticed by now, getting this to work is a somewhat tedious process which could probably be streamlined. Some other issues remain, that might be harder to fix, though. You will notice a delay when switching to a desktop with a different wallpaper until all your filters display the new wallpaper image. Also you will notice a spike in CPU usage while the App processes the new wallpaper.</p>
+
+<p>For these reasons, please be careful when using this feature and expect some changes in the future. In the meantime, happy styling and experimenting!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Felix Hageloh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-25T18:09:00+02:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/07/03/uebersicht-0-dot-2/" title="Previous Post: Übersicht 0.2">&laquo; Übersicht 0.2</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Felix Hageloh -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tracesof';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://felixhageloh.github.io/blog/2014/08/25/background-filters-for-ubersicht/';
+        var disqus_url = 'http://felixhageloh.github.io/blog/2014/08/25/background-filters-for-ubersicht/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
