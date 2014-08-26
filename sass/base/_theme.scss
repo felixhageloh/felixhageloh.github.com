@@ -91,3 +91,9 @@ article ul li {
   padding-left: 8px;
   border-left: 8px solid #ddd;
 }
+
+article {
+  figure.code, .gist-file, pre {
+    @include box-shadow(none);
+  }
+}
