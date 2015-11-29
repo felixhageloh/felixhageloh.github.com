@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Übersicht - Traces Of</title>
+  <title>Clickable Widgets Experiment - Traces Of</title>
   <meta name="author" content="Felix Hageloh">
 
   
-  <meta name="description" content="Earlier today I released Übersicht, a little Mac app I originally wrote to scratch my own itch. It is essentially like GeekTool, which lets you run &hellip;">
+  <meta name="description" content="If you have followed the developments of Übersicht, you will be aware of the 0.6 release which attempted to make Widgets clickable by default. In the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://felixhageloh.github.io/blog/2014/04/22/ubersicht">
+  <link rel="canonical" href="http://felixhageloh.github.io/blog/2015/11/29/clickable-widgets-experiment">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Traces Of" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Übersicht</h1>
+      <h1 class="entry-title">Clickable Widgets Experiment</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2014-04-22T13:26:00+02:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2014</time>
+<time datetime="2015-11-29T13:58:00+01:00" pubdate data-updated="true">Nov 29<span>th</span>, 2015</time>
         
           <a href="#disqus_thread"
              data-disqus-identifier="http://felixhageloh.github.io">
@@ -108,19 +108,25 @@
   </header>
 
 
-<div class="entry-content"><p><img class="left" src="/images/uebersicht@2x.png" width="256" height="256" title="icon" /></p>
+<div class="entry-content"><p>If you have followed the developments of Übersicht, you will be aware of the 0.6 release which attempted to make Widgets clickable by default. In the new 0.7 release I’m reverting to using a shortcut key again and I thought I’d share what lead to this.</p>
 
-<p>Earlier today I released <a href="http://tracesof.net/uebersicht/">Übersicht</a>, a little Mac app I originally wrote to scratch my own itch. It is essentially like <a href="http://projects.tynsoe.org/en/geektool/">GeekTool</a>, which lets you run system commands and display their output on your desktop. The main difference that widgets are written in HTML5, which was originally motivated by these two main reasons:</p>
+<h3 id="clickable-widgets">Clickable Widgets</h3>
 
-<ul>
-  <li>I can plug in a different monitor without my widgets breaking</li>
-  <li>I can easily write my own widgets</li>
-</ul>
+<p>I thought I found a great solution that would make widgets act more like Desktop icons, which means that they could be clicked on and interacted with at any time. I stumbled across the solution while working on something else, so it was not a planned feature, but the solution seemed very simple and even removed code. So it looked like a win win situation and a low hanging fruit to be released with other fixes.</p>
 
-<p>So in essence the app is just a large WebView that is glued to your desktop and widgets are little snippets of HTML+CSS+JS. Of course you can’t run system commands from within a WebView, so the app comes with a NodeJs backend. For more details on that, you can checkout out the <a href="http://slides.com/felixhageloh/node-native">slides</a> for my talk at the local Amsterdam JavaScript Meetup.</p>
+<p>It turns out that, not only did I overlook some obvious defects, but also the Übersicht widget community has been insanely creative, creating widgets and use cases that I had not imagined ever! After releasing v0.6 the bug reports start trickling in. Initially they all seemed like easy bugs to fix, but as more and more use cases started coming to light, it became apparent that not all would be supportable with this approach. What as even worse, some bugs started popping up that were very hard to reproduce and only surfaced after Übersicht was running for a while.</p>
 
-<p>Of course, also checkout the <a href="http://tracesof.net/uebersicht/">app itself</a>. It is released under the GPL license and the code can be found on <a href="https://github.com/felixhageloh/uebersicht">GitHub</a>!</p>
+<h3 id="reverting-to-interaction-shortcuts">Reverting to Interaction Shortcuts</h3>
 
+<p>I learned a lot about the innards of OS X while working on this and many times I came very close to making clickable widgets work. It is one of these things that either has to work flawlessly or else it becomes very annoying very fast. In the end there was always those last 2% missing or one mysterious bug that would surface every once in a while (but often enough to be an issue) would remain.</p>
+
+<p>Always clickable widgets was not necessarily something that people have asked for, nor did the previous solution of using a shortcut key seem to have big drawbacks for most people. Also, my spare time to work on Übersicht is limited and fixing this feature started to look like a massive time sink. Time which I could use to develop other great features, which actually have been requested but the community, instead.</p>
+
+<h3 id="whats-next">What’s Next</h3>
+
+<p>Taken all into consideration, it was an easy decision to revert to using shortcut keys for now. Version 0.7, which has been released today, reverts to the old - pre v0.6 - behavior. I hope to be releasing other great features in the future and maybe I will pick this one up again at some point. In the meantime I’m curious to see what other great widgets you guys come up with. The enthusiasm and creativity that this simple little App inspires is awesome to see and a great motivator for me to keep working on it!</p>
+
+<p>Thank you!</p>
 </div>
 
 
@@ -143,24 +149,16 @@
   
 
 
-<time datetime="2014-04-22T13:26:00+02:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2014</time>
+<time datetime="2015-11-29T13:58:00+01:00" pubdate data-updated="true">Nov 29<span>th</span>, 2015</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/html/'>HTML</a>, <a class='category' href='/blog/categories/mac-os/'>Mac OS</a>, <a class='category' href='/blog/categories/nodejs/'>NodeJS</a>, <a class='category' href='/blog/categories/release/'>release</a>
-  
-</span>
 
 
     </p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/21/text-entry-mobile/" title="Previous Post: Text Entry Woes for Mobile Web Apps">&laquo; Text Entry Woes for Mobile Web Apps</a>
+        <a class="basic-alignment left" href="/blog/2014/08/25/background-filters-for-ubersicht/" title="Previous Post: Background Filters for Übersicht">&laquo; Background Filters for Übersicht</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/07/03/uebersicht-0-dot-2/" title="Next Post: Übersicht 0.2">Übersicht 0.2 &raquo;</a>
       
     </p>
   </footer>
@@ -190,8 +188,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://felixhageloh.github.io/blog/2014/04/22/ubersicht/';
-        var disqus_url = 'http://felixhageloh.github.io/blog/2014/04/22/ubersicht/';
+        var disqus_identifier = 'http://felixhageloh.github.io/blog/2015/11/29/clickable-widgets-experiment/';
+        var disqus_url = 'http://felixhageloh.github.io/blog/2015/11/29/clickable-widgets-experiment/';
         var disqus_script = 'embed.js';
       
     (function () {

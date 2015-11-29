@@ -9,7 +9,7 @@
   <meta name="author" content="Felix Hageloh">
 
   
-  <meta name="description" content="Today I want to reveal a ‘hidden’ feature of Übersicht that has been available since version 0.2. The reason for this secrecy is that it is in an &hellip;">
+  <meta name="description" content="If you have followed the developments of Übersicht, you will be aware of the 0.6 release which attempted to make Widgets clickable by default. In the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,65 @@
     <div class="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/11/29/clickable-widgets-experiment/">Clickable Widgets Experiment</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-11-29T13:58:00+01:00" pubdate data-updated="true">Nov 29<span>th</span>, 2015</time>
+        
+          <a href="/blog/2015/11/29/clickable-widgets-experiment/#disqus_thread"
+             data-disqus-identifier="http://felixhageloh.github.io/blog/2015/11/29/clickable-widgets-experiment/">
+            Comments
+          </a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you have followed the developments of Übersicht, you will be aware of the 0.6 release which attempted to make Widgets clickable by default. In the new 0.7 release I’m reverting to using a shortcut key again and I thought I’d share what lead to this.</p>
+
+<h3 id="clickable-widgets">Clickable Widgets</h3>
+
+<p>I thought I found a great solution that would make widgets act more like Desktop icons, which means that they could be clicked on and interacted with at any time. I stumbled across the solution while working on something else, so it was not a planned feature, but the solution seemed very simple and even removed code. So it looked like a win win situation and a low hanging fruit to be released with other fixes.</p>
+
+<p>It turns out that, not only did I overlook some obvious defects, but also the Übersicht widget community has been insanely creative, creating widgets and use cases that I had not imagined ever! After releasing v0.6 the bug reports start trickling in. Initially they all seemed like easy bugs to fix, but as more and more use cases started coming to light, it became apparent that not all would be supportable with this approach. What as even worse, some bugs started popping up that were very hard to reproduce and only surfaced after Übersicht was running for a while.</p>
+
+<h3 id="reverting-to-interaction-shortcuts">Reverting to Interaction Shortcuts</h3>
+
+<p>I learned a lot about the innards of OS X while working on this and many times I came very close to making clickable widgets work. It is one of these things that either has to work flawlessly or else it becomes very annoying very fast. In the end there was always those last 2% missing or one mysterious bug that would surface every once in a while (but often enough to be an issue) would remain.</p>
+
+<p>Always clickable widgets was not necessarily something that people have asked for, nor did the previous solution of using a shortcut key seem to have big drawbacks for most people. Also, my spare time to work on Übersicht is limited and fixing this feature started to look like a massive time sink. Time which I could use to develop other great features, which actually have been requested but the community, instead.</p>
+
+<h3 id="whats-next">What’s Next</h3>
+
+<p>Taken all into consideration, it was an easy decision to revert to using shortcut keys for now. Version 0.7, which has been released today, reverts to the old - pre v0.6 - behavior. I hope to be releasing other great features in the future and maybe I will pick this one up again at some point. In the meantime I’m curious to see what other great widgets you guys come up with. The enthusiasm and creativity that this simple little App inspires is awesome to see and a great motivator for me to keep working on it!</p>
+
+<p>Thank you!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -555,7 +614,7 @@ In order to get this widget ready for background filters we first need to create
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Felix Hageloh -
+  Copyright &copy; 2015 - Felix Hageloh -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
