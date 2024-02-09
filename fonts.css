@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Gilda Display';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/Gilda_Display/GildaDisplay-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Barlow Semi Condensed';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf') format('truetype');
+}
